@@ -9,19 +9,15 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+const teamMembers = []
 
 // array of questions for user
 const questions = [
     {
-        type: "input",
-        name: "name",
-        message: "Enter employee name.",
-    },
-    {
         type: "list",
         message: "Select employee role.",
         name: "role",
-        choice: [
+        choices: [
             "Manager",
             "Engineer",
             "Intern"
@@ -29,17 +25,59 @@ const questions = [
     },
     {
         type: "input",
-        name: "ID",
+        name: "name",
         message: "Enter employee name.",
+    },
+
+    {
+        type: "input",
+        name: "id",
+        message: "Enter employee ID.",
     },
     {
         type: "input",
-        name: "roleProperty",
-        message: "Enter employee name.",
+        name: "email",
+        message: "Enter employee email.",
     },
-
+    {
+        type: "input",
+        name: "officeNumber",
+        message: "Enter the manager's office number.",
+        when: (input) => {
+            if (input.role === "Manager") {
+                return true
+            }
+        }
+    },
+    {
+        type: "input",
+        name: "github",
+        message: "Enter the engineer's GitHub Username.",
+        when: (input) => {
+            if (input.role === "Engineer") {
+                return true
+            }
+        }
+    },
+    {
+        type: "input",
+        name: "school",
+        message: "Enter the intern's school.",
+        when: (input) => {
+            if (input.role === "Intern") {
+                return true
+            }
+        }
+    },
 ];
 
+function init() {
+    inquirer.prompt(questions).then((answers) => {
+        console.log(answers)
+    })
+}
+
+init()
 
 
 // Write code to use inquirer to gather information about the development team members,
