@@ -22,7 +22,7 @@ const questions = [
             "Manager",
             "Engineer",
             "Intern"
-        ]
+        ],
     },
     {
         type: "input",
@@ -70,6 +70,15 @@ const questions = [
             }
         }
     },
+    {
+        type: "list",
+        message: "Any more employees to add?",
+        name: "addEmployee",
+        choices: [
+            "Yes",
+            "No",
+        ]
+    }
 ];
 
 function init() {
@@ -86,12 +95,16 @@ function init() {
             const newIntern = new Intern(answers.name, answers.id, answers.email, answers.school);
             teamMembers.push(newIntern);
         }
-        //need to call a function to continue after this series of conditionals, and if they want to continue, then call init() again
-
+        if (answers.addEmployee === "Yes") {
+            init();
+        }
+        console.log(teamMembers)
     })
-}
+};
 
 init()
+
+
 
 //create a function to add everything to file-- take the team array and pass it into the render function!! The render function will return a string, and that needs to be stored in a variable, then take that variable, and then that will go inside write.fs file
 //const mytemplate = render(teamArray) -- this will give you the string return, and that's what you'll write to the file
