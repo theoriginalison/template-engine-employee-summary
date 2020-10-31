@@ -98,11 +98,15 @@ function init() {
         if (answers.addEmployee === "Yes") {
             init();
         }
-        console.log(teamMembers)
+        else {
+            fs.writeFileSync("team.html", render(teamMembers));
+        }
     })
 };
 
-init()
+init();
+
+
 
 
 
