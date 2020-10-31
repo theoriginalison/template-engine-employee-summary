@@ -9,6 +9,7 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+const { off } = require("process");
 const teamMembers = []
 
 // array of questions for user
@@ -73,11 +74,27 @@ const questions = [
 
 function init() {
     inquirer.prompt(questions).then((answers) => {
-        console.log(answers)
+        if (answers.role === "Manager") {
+            const newManager = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
+            teamMembers.push(newManager);
+        }
+        else if (answers.role === "Engineer") {
+            const newEngineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
+            teamMembers.push(newEngineer);
+        }
+        else {
+            const newIntern = new Intern(answers.name, answers.id, answers.email, answers.school);
+            teamMembers.push(newIntern);
+        }
+        //need to call a function to continue after this series of conditionals, and if they want to continue, then call init() again
+
     })
 }
 
 init()
+
+//create a function to add everything to file-- take the team array and pass it into the render function!! The render function will return a string, and that needs to be stored in a variable, then take that variable, and then that will go inside write.fs file
+//const mytemplate = render(teamArray) -- this will give you the string return, and that's what you'll write to the file
 
 
 // Write code to use inquirer to gather information about the development team members,
