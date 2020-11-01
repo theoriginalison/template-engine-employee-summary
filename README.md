@@ -22,8 +22,8 @@ Run an npm install on inquirer and jest.
 Once installed, open the terminal. Add all employees. When you're finished, indicate that there are no more employees to add (a "NO" to the final question). Then, the team.html team page will be generated in the root folder of the application.
 
 ## Screeshot
-![Screenshot of questions in terminal](??)
-![Screenshot of generated HTML File](??)
+![Screenshot of questions in terminal](./assets/terminal-prompts-screenshot.png)
+![Screenshot of generated HTML File](./assets/employee-page-screenshot.png)
 
 ## License
 MIT License
